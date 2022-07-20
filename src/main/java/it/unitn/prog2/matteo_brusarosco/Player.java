@@ -13,10 +13,14 @@ public class Player extends Entity {
     }
 
     public boolean isColliding(Entity e) {
-        double diffX = Math.pow((e.posX - posX), 2);
-        double diffY = Math.pow((e.posY - posY), 2);
-        double distance = Math.sqrt(diffX+diffY);
-        double actualDistance = distance-getSize()-e.getSize();
-        return actualDistance <= 0;
+        if (!e.collisionDeactivated) {
+            double diffX = Math.pow((e.posX - posX), 2);
+            double diffY = Math.pow((e.posY - posY), 2);
+            double distance = Math.sqrt(diffX+diffY);
+            double actualDistance = distance-getSize()-e.getSize();
+            return actualDistance <= 0;
+        }
+
+        return false;
     }
 }

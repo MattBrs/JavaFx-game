@@ -8,12 +8,13 @@ import java.util.Random;
 public abstract class Entity extends Circle {
     final int GAME_SIZE_X = 500;
     final int GAME_SIZE_Y = 500;
-
     private double _size = 20;
     int stepSize = 10;
     int posX = 0;
     int posY = 0;
     int direction = 0;
+    boolean collisionDeactivated = true;
+    int countSafeIterations = 3;
     Color entityColor;
     Random rnd;
 
@@ -92,6 +93,12 @@ public abstract class Entity extends Circle {
 
         checkBoundary();
         setPosition();
+
+        if (countSafeIterations > 0) {
+            countSafeIterations--;
+        } else {
+            collisionDeactivated = false;
+        }
     }
 
     public void setPosition() {
