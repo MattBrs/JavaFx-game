@@ -71,7 +71,6 @@ public class Main extends Application {
                 // generate a new random entity with a 10% probability
                 if (rnd.nextDouble() <= 0.1) {
                     int entityType = rnd.nextInt(3);
-                    System.out.println(entityType);
                     Entity newEntity;
                     switch (entityType) {
                         case 0: newEntity = new Wanderer(); break;
