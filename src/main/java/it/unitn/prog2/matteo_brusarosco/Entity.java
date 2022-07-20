@@ -10,8 +10,8 @@ public abstract class Entity extends Circle {
     final int GAME_SIZE_Y = 500;
     private double _size = 20;
     int stepSize = 10;
-    int posX = 0;
-    int posY = 0;
+    int posX;
+    int posY;
     int direction = 0;
     boolean collisionDeactivated = true;
     int countSafeIterations = 3;

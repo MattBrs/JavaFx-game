@@ -3,13 +3,9 @@ package it.unitn.prog2.matteo_brusarosco;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -33,7 +29,7 @@ public class Main extends Application {
         root.getChildren().add(player);
         root.getChildren().addAll(entities);
 
-        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new HandlePlayerInput(player, entities, root));
+        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, new HandlePlayerInput(player, entities, root, primaryStage));
         primaryStage.setTitle("Escape!");
         primaryStage.setScene(new Scene(root, 500, 500));
         primaryStage.show();
@@ -46,12 +42,13 @@ public class Main extends Application {
     class HandlePlayerInput implements EventHandler<KeyEvent> {
         Player player;
         List<Entity> entities;
-
+        Stage mainStage;
         Pane gamePane;
-        HandlePlayerInput(Player player, List<Entity> entities, Pane gamePane) {
+        HandlePlayerInput(Player player, List<Entity> entities, Pane gamePane, Stage mainStage) {
             this.player = player;
             this.entities = entities;
             this.gamePane = gamePane;
+            this.mainStage = mainStage;
         }
 
         @Override
@@ -94,7 +91,7 @@ public class Main extends Application {
                 if (collisionDetected) {
                     gameEnded = true;
                     new GameEndedWindow(new Stage(), points);
-
+                    mainStage.close();
                 } else {
                     points+= 100;
                 }
